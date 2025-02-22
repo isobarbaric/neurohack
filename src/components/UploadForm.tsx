@@ -25,7 +25,7 @@ const UploadForm: React.FC<UploadFormProps> = ({ onFileUpload }) => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4">
-      <label htmlFor="file-input" className="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <label htmlFor="file-input" className="cursor-pointer bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded">
         <div className="flex items-center">
           <Upload className="mr-2" size={20} />
           <span>Select File</span>
