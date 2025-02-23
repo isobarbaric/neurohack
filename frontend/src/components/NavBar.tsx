@@ -55,6 +55,7 @@ const NavBar: React.FC<NavBarProps> = ({ user, setUser }) => {
       {/* Mobile Menu (Collapsible) */}
       <div className={`lg:hidden ${isOpen ? "block" : "hidden"}`}>
         <div className="flex flex-col space-y-2 mt-4">
+		  {/*
           <Link to="/" className="text-white hover:text-gray-200">
             Landing Page
           </Link>
@@ -64,11 +65,14 @@ const NavBar: React.FC<NavBarProps> = ({ user, setUser }) => {
           <Link to="/recordVideo" className="text-white hover:text-gray-200">
             Record Video
           </Link>
+		  */}
           {user && (
             <button
               onClick={handleLogout}
               className="text-white hover:text-gray-200"
-            />
+            > 
+			  Log Out 
+			</button>
           )}
         </div>
       </div>
