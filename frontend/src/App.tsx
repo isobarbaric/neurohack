@@ -3,6 +3,8 @@ import { User, OAuthUser } from "./types/user";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { Dashboard } from "./Dashboard";
+import AppBar from "./components/AppBar";
+import Recorder from "./components/Recorder";
 
 const App = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -27,7 +29,6 @@ const App = () => {
     <>
       {!user && (
         <GoogleLogin
-          className="w-[400px]"
           onSuccess={handleSuccess}
           onError={handleError}
           useOneTap
@@ -35,6 +36,7 @@ const App = () => {
       )}
       {/* put dashboard component below */}
       {user && <Dashboard user={user} />}
+      <Recorder />
     </>
   );
 };

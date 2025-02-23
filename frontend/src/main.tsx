@@ -2,7 +2,9 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { ReactNode } from "react";
+import './AppLayout.css'
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
