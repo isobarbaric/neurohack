@@ -1,6 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
 
-const DrawingCanvas: React.FC = () => {
+interface Props {
+  handleOpenModal: (
+    modalName: "Canvas" | "Record Audio" | "Result Model"
+  ) => void;
+  handleSeverityChange: (revSeverity: number) => void;
+}
+
+const DrawingCanvas: React.FC<Props> = ({
+  handleOpenModal,
+  handleSeverityChange,
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
 
@@ -98,12 +108,16 @@ const DrawingCanvas: React.FC = () => {
           // "Content-Type": "text/plain",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ "image": image }),
+        body: JSON.stringify({ image: image }),
         // body: image,
       });
 
       if (response.ok) {
         console.log("Drawing saved successfully!");
+        const res = await response.json();
+        const data = res.data;
+        handleOpenModal("Result Model");
+        handleSeverityChange(4);
       } else {
         console.error("Failed to save drawing.");
       }
