@@ -3,7 +3,6 @@ import { User, OAuthUser } from "./types/user";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { Dashboard } from "./Dashboard";
-import AppBar from "./components/AppBar";
 import Recorder from "./components/Recorder";
 
 const App = () => {
@@ -24,25 +23,9 @@ const App = () => {
     }
   };
 
-  const handleError = () => {
-    console.log("Login failed");
-  };
-
-  // const login = useGoogleOneTapLogin({
-  //   onSuccess: (credentials) => handleSuccess(credentials),
-  //   onError: () => handleError(),
-  // });
-
   return (
     <>
       {!user && (
-<<<<<<< Updated upstream
-        <GoogleLogin
-          onSuccess={handleSuccess}
-          onError={handleError}
-          useOneTap
-        />
-=======
         <div
           style={{
             display: "flex",
@@ -124,7 +107,6 @@ const App = () => {
             }}
           />
         </div>
->>>>>>> Stashed changes
       )}
       {user && <Dashboard user={user} />}
       <Recorder />
