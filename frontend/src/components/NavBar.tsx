@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { User } from "../types/user";
 import { googleLogout } from "@react-oauth/google";
 
 interface NavBarProps {
-  user: User | null,
+  user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
@@ -17,7 +16,7 @@ const NavBar: React.FC<NavBarProps> = ({ user, setUser }) => {
 
   const handleLogout = () => {
     googleLogout();
-	setUser(null);
+    setUser(null);
   };
 
   return (
@@ -55,24 +54,13 @@ const NavBar: React.FC<NavBarProps> = ({ user, setUser }) => {
       {/* Mobile Menu (Collapsible) */}
       <div className={`lg:hidden ${isOpen ? "block" : "hidden"}`}>
         <div className="flex flex-col space-y-2 mt-4">
-		  {/*
-          <Link to="/" className="text-white hover:text-gray-200">
-            Landing Page
-          </Link>
-          <Link to="/recordAudio" className="text-white hover:text-gray-200">
-            Record Audio
-          </Link>
-          <Link to="/recordVideo" className="text-white hover:text-gray-200">
-            Record Video
-          </Link>
-		  */}
           {user && (
             <button
               onClick={handleLogout}
               className="text-white hover:text-gray-200"
-            > 
-			  Log Out 
-			</button>
+            >
+              Log Out
+            </button>
           )}
         </div>
       </div>
