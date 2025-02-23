@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video - Please do as the instructions say</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Video - Please do as the instructions say</h1>
+    <p class="instructions">
+      Click "Start Recording" to begin recording using your webcam. Click "Stop Recording" when you're done.
+      You can replay or retake the video after recording.
+    </p>
+
+    <!-- Video-taking interface -->
+    <div id="videoTakingInterface">
+      <div class="video-container">
+        <video id="liveVideo" autoplay muted></video>
+      </div>
+      <div class="controls">
+        <button id="startButton">Start Recording</button>
+        <button id="stopButton" disabled>Stop Recording</button>
+        <button id="replayButton" style="display: none;">Replay Video</button>
+        <button id="retakeButton" style="display: none;">Retake Video</button>
+      </div>
+    </div>
+
+    <!-- Video replay interface (hidden by default) -->
+    <div id="videoReplayInterface" style="display: none;">
+      <div class="video-container">
+        <video id="recordedVideo" controls></video>
+      </div>
+      <div class="controls">
+        <button id="backButton">Back to Recording</button>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
