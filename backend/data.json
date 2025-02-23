@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "email": 1,
+      "firstName": "tom",
+      "lastName": "brady",
+      "image": "asdf",
+      "data": [
+        {
+          "date": "feb23",
+          "drawing": {
+            "parkinson_prob": 0.63,
+            "healthy_prob": 0.37
+          },
+          "facial": []
+        }
+      ]
+    }
+  ]
+}
