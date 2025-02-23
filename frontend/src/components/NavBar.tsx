@@ -1,68 +1,79 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { User } from "../types/user";
+import { googleLogout } from "@react-oauth/google";
 
-function NavBar() {
-  type Page = "home" | "progress" | "settings";
-  const [currentPage, setCurrentPage] = useState<Page>("home");
-  const [menuOpen, setMenuOpen] = useState(false);
+interface NavBarProps {
+  user: User | null,
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+}
 
-  const handleNavigation = (page: Page) => {
-    setCurrentPage(page);
-    setMenuOpen(false); // Close the menu after selection
-    console.log(`Navigating to: ${page}`);
+const NavBar: React.FC<NavBarProps> = ({ user, setUser }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    googleLogout();
+	setUser(null);
   };
 
   return (
-    <nav className="bg-white shadow-md fixed top-0 w-full z-50">
-      <div className="flex justify-between items-center p-4">
-        <div className="text-xl font-bold text-blue-600">NeuroTracker</div>
+    <nav
+      className="p-4 fixed w-full top-0 left-0 z-50"
+      style={{ backgroundColor: "#D8B892" }}
+    >
+      <div className="container mx-auto flex justify-between items-center">
+        {/* Logo */}
+        <div className="text-white text-2xl font-bold">Neuro Track</div>
 
-        {/* Mobile Menu Toggle */}
-        <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle Menu">
-          {menuOpen ? (
-            <div className="material-symbols-outlined">menu</div>
-          ) : (
-            <div className="material-symbols-outlined">close</div>
-          )}
-        </button>
-      </div>
-
-      {/* Mobile Navigation Menu */}
-      {menuOpen && (
-        <div className="flex flex-col gap-2 p-4">
+        <div className="block lg:hidden">
           <button
-            className={`text-left px-4 py-2 rounded-lg transition-colors ${
-              currentPage === "home"
-                ? "bg-blue-500 text-white"
-                : "text-gray-700 hover:bg-gray-100"
-            }`}
-            onClick={() => handleNavigation("home")}
+            onClick={toggleMenu}
+            className="text-white focus:outline-none"
           >
-            Home
-          </button>
-          <button
-            className={`text-left px-4 py-2 rounded-lg transition-colors ${
-              currentPage === "progress"
-                ? "bg-blue-500 text-white"
-                : "text-gray-700 hover:bg-gray-100"
-            }`}
-            onClick={() => handleNavigation("progress")}
-          >
-            Progress
-          </button>
-          <button
-            className={`text-left px-4 py-2 rounded-lg transition-colors ${
-              currentPage === "settings"
-                ? "bg-blue-500 text-white"
-                : "text-gray-700 hover:bg-gray-100"
-            }`}
-            onClick={() => handleNavigation("settings")}
-          >
-            Settings
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              ></path>
+            </svg>
           </button>
         </div>
-      )}
+      </div>
+
+      {/* Mobile Menu (Collapsible) */}
+      <div className={`lg:hidden ${isOpen ? "block" : "hidden"}`}>
+        <div className="flex flex-col space-y-2 mt-4">
+          <Link to="/" className="text-white hover:text-gray-200">
+            Landing Page
+          </Link>
+          <Link to="/recordAudio" className="text-white hover:text-gray-200">
+            Record Audio
+          </Link>
+          <Link to="/recordVideo" className="text-white hover:text-gray-200">
+            Record Video
+          </Link>
+          {user && (
+            <button
+              onClick={handleLogout}
+              className="text-white hover:text-gray-200"
+            />
+          )}
+        </div>
+      </div>
     </nav>
   );
-}
+};
 
 export default NavBar;
