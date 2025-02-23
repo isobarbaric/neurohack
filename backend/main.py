@@ -24,12 +24,18 @@ def get_user(first_name):
 @app.route('/api/drawing/', methods=['POST'])
 def evaluate_drawing():
     data = request.get_json()['image']
-    data = data[len("data:image/png;base64,"):]
     results = run_inference(data)
     
     # TODO save results in database    
     print(results)
     return {'message': 'success', 'results': results}
+
+@app.after_request
+def add_header(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
 
 
 if __name__ == '__main__':
