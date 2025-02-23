@@ -21,14 +21,20 @@ import ModelResults from "./components/ModelResults";
 
 const App = () => {
   const [user, setUser] = useState<User | null>(null);
+  const [severityScore, setSeverityScore] = useState<number>(3);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [whichModal, setWhichModal] = useState<
     "Canvas" | "Record Audio" | "Result Model" | null
   >(null);
 
-  const openModal = (modalName: "Canvas" | "Record Audio") => {
+  const openModal = (modalName: "Canvas" | "Record Audio" | "Result Model") => {
     setIsModalOpen(true);
     setWhichModal(modalName);
+  };
+  const handleOpenModal = (
+    modalName: "Canvas" | "Record Audio" | "Result Model"
+  ) => {
+    openModal(modalName);
   };
   const closeModal = () => setIsModalOpen(false);
 
@@ -68,6 +74,10 @@ const App = () => {
       });
       console.log("hello");
     }
+  };
+
+  const handleSeverityChange = (revSeverity: number) => {
+    setSeverityScore(revSeverity);
   };
 
   return (
@@ -155,9 +165,14 @@ const App = () => {
           <h2 className="text-xl font-bold mb-4">{whichModal}</h2>
           {whichModal == "Record Audio" && <Recorder />}
           {whichModal == "Canvas" && (
-            <DrawingCanvas setIsModalOpen={setIsModalOpen} />
+            <DrawingCanvas
+              handleOpenModal={handleOpenModal}
+              handleSeverityChange={handleSeverityChange}
+            />
           )}
-          {whichModal == "Result Model" && <ModelResults />}
+          {whichModal == "Result Model" && (
+            <ModelResults severity={severityScore} />
+          )}
           <button
             onClick={closeModal}
             className="mt-4 bg-red-500 text-white px-4 py-2 rounded"

@@ -1,11 +1,12 @@
 import { User } from "../types/user";
+interface Props {
+  severity: number | 3;
+}
 
-const ModelResults = () => {
+const ModelResults: React.FC<Props> = ({ severity }) => {
   return (
     <div>
-      <div className={`text-2xl font-bold ${severityColor}`}>
-        Severity Level: {3}
-      </div>
+      <div className={`text-2xl font-bold`}>Severity Level: {severity}</div>
     </div>
   );
 };
