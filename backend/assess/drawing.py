@@ -25,9 +25,9 @@ def run_inference(image):
     print(results)
 
     if results[0]['label'] == 'parkinson':
-        return {'data': math.floor((results[0]['score']) * 10)}
+        return {'data': math.floor((results[0]['score']) * 100)/10}
     else:
-        return {'data': math.floor((results[1]['score']) * 10)}
+        return {'data': math.floor((results[1]['score']) * 100)/10}
 
     # img = Image.open(image)
 

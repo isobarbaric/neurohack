@@ -8,7 +8,6 @@ interface LandingPageProps {
 
 const LandingPage: React.FC<LandingPageProps> = ({ userRef }) => {
   const handleSuccess = (credentialResponse: any) => {
-    console.log("here");
     if (credentialResponse.credential) {
       const decodedUser = jwtDecode(credentialResponse.credential) as OAuthUser;
       userRef.current = ({
@@ -17,7 +16,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ userRef }) => {
         firstName: decodedUser.given_name! || "DNE",
         image: decodedUser.picture! || "DNE",
       });
-      console.log("hello");
 	  console.log(userRef.current)
     }
   };

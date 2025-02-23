@@ -23,9 +23,9 @@ const DrawingCanvas: React.FC<Props> = ({
     if (!context) return;
 
     // Set up drawing properties
-    context.lineWidth = 5;
+    context.lineWidth = 2;
     context.lineCap = "round";
-    context.strokeStyle = "#000000";
+    context.strokeStyle = "#b6b6b6";
 
     // Handle mouse/touch events
     const startDrawing = (event: MouseEvent | TouchEvent) => {
@@ -115,9 +115,9 @@ const DrawingCanvas: React.FC<Props> = ({
       if (response.ok) {
         console.log("Drawing saved successfully!");
         const res = await response.json();
-        const data = res.data;
+        const data = res.results.data;
         handleOpenModal("Result Model");
-        handleSeverityChange(4);
+        handleSeverityChange(data);
       } else {
         console.error("Failed to save drawing.");
       }

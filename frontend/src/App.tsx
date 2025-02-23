@@ -63,7 +63,6 @@ const App = () => {
   };
 
   const handleSuccess = (credentialResponse: any) => {
-    console.log("here");
     if (credentialResponse.credential) {
       const decodedUser = jwtDecode(credentialResponse.credential) as OAuthUser;
       setUser({
@@ -72,7 +71,6 @@ const App = () => {
         firstName: decodedUser.given_name! || "DNE",
         image: decodedUser.picture! || "DNE",
       });
-      console.log("hello");
     }
   };
 
