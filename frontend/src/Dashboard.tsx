@@ -1,5 +1,11 @@
 import { User } from "./types/user";
+import NavBar from "./components/NavBar";
 
 export const Dashboard = ({ user }: { user: User }) => {
-  return <div>Hello, {user.firstName}!</div>;
+  return (
+    <div>
+      <NavBar />
+      <div>Hello, {user.firstName}!</div>
+    </div>
+  );
 };
