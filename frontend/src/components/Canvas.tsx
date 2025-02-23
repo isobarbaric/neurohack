@@ -92,12 +92,14 @@ const DrawingCanvas: React.FC = () => {
 
     // Send the image to the backend
     try {
-      const response = await fetch("/api/upload-drawing", {
+      const response = await fetch("http://127.0.0.1:5000/api/drawing/", {
         method: "POST",
         headers: {
+          // "Content-Type": "text/plain",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ image }),
+        body: JSON.stringify({ "image": image }),
+        // body: image,
       });
 
       if (response.ok) {
