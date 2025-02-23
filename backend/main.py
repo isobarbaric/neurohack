@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request
 import json
 from assess.drawing import run_inference
+from flask_cors import CORS  # Import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 with open('data.json', 'r') as f:
     data = json.load(f)
@@ -20,14 +22,14 @@ def get_user(first_name):
     return jsonify({"error": "User not found"}), 404
 
 @app.route('/api/drawing/', methods=['POST'])
-def evaluate_drawing(img):
-    results = run_inference(img)
-    data = request.get_json()
-    print(data)
+def evaluate_drawing():
+    data = request.get_json()['image']
+    data = data[len("data:image/png;base64,"):]
+    results = run_inference(data)
     
     # TODO save results in database    
     print(results)
-    # return {'message': 'success', 'results': results}
+    return {'message': 'success', 'results': results}
 
 
 if __name__ == '__main__':

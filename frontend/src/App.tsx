@@ -11,15 +11,16 @@ import DashboardPage from "./pages/DashboardPage";
 import NavBar from './components/NavBar'
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import DrawingCanvas from './components/Canvas'
 
 const App = () => {
   const [user, setUser] = useState<User | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [recordWhich, setRecordWhich] = useState<"audio" | "video" | null>(null);
+  const [whichModal, setWhichModal] = useState<"Canvas" | "Record Audio" | null>(null);
 
-  const openModal = (modalName: "audio" | "video") => {
+  const openModal = (modalName: "Canvas" | "Record Audio") => {
 	setIsModalOpen(true);
-	setRecordWhich(modalName);
+	setWhichModal(modalName);
   }
   const closeModal = () => setIsModalOpen(false);
 
@@ -34,9 +35,7 @@ const App = () => {
 
 	return (
 	  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-		{/* Modal Content */}
 		<div className="bg-white rounded-lg p-6 w-11/12 max-w-md relative">
-		  {/* Close Button */}
 		  <button
 			onClick={closeModal}
 			className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
@@ -110,13 +109,13 @@ const App = () => {
 		  /> : 
 		  <>
 			<button
-			  onClick={()=>openModal("video")}
+			  onClick={()=>openModal("Canvas")}
 			  className="bg-blue-500 text-white px-4 py-2 my-2 rounded"
 			>
-			  Record Video
+			  Record Drawing
 			</button>
 			 <button
-				onClick={()=>openModal("audio")}
+				onClick={()=>openModal("Record Audio")}
 				className="bg-blue-500 text-white px-4 py-2 my-2 rounded"
 			  >
 				Record Audio
@@ -125,11 +124,10 @@ const App = () => {
 		}
 
 		<Modal isOpen={isModalOpen} onClose={closeModal}>
-		  <h2 className="text-xl font-bold mb-4">Modal Title</h2>
-		  <p>This is the content of the modal.</p>
-		  {recordWhich=="audio" ?
-			<p>audio</p> :
-			<p>video</p>
+		  <h2 className="text-xl font-bold mb-4">{whichModal}</h2>
+		  {whichModal=="Record Audio" ?
+			<Recorder/> :
+			<DrawingCanvas/>
 		  }
 		  <button
 			onClick={closeModal}
